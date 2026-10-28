@@ -29,15 +29,41 @@ To remove it, empty the box and save.
 
 ## Make it yours
 
-Add these lines **after** the `@import`, in the same box:
+The theme has three settings. You change them in the **same box** where you pasted the `@import` (Dashboard → **General** → **Custom CSS code**), by adding a few lines **below** it. Do not touch the theme file itself: your lines stay yours when the theme is updated.
+
+**1. Open the box.** Dashboard → General → scroll to **Custom CSS code**. It should already contain the `@import` line from the install step. Keep it as the very first line (CSS requires `@import` to come before everything else).
+
+**2. Add your lines under it.** For example, a blue accent instead of red, so the whole box looks like this:
+
+```css
+@import url("https://cdn.jsdelivr.net/gh/kiketorres98/jellyfin-afterglow@v12/afterglow.css");
+
+:root {
+  --ag-accent: #3b82f6;
+}
+```
+
+**3. Save and reload the page** (Ctrl+F5 if nothing changes). To go back to the default look, delete the `:root { ... }` block and save.
+
+### The three settings
+
+| Setting | What it changes | Default | Examples |
+|---|---|---|---|
+| `--ag-accent` | The colour of the big play button, buttons, progress bars, checkboxes, the selected tab and the focus ring. Lighter and darker shades are worked out from it automatically. | `#cb302d` (red) | `#3b82f6` blue, `#22c55e` green, `#a855f7` purple, `#f59e0b` amber |
+| `--ag-played` | The small corner mark on titles you have already watched. | `#1f9d55` (green) | `#3b82f6`, `#f59e0b` |
+| `--ag-radius` | How round the corners of posters and cards are. `0px` is square. | `10px` | `0px`, `6px`, `16px` |
+
+You only need to write the settings you want to change; leave the others out. Colours are written as `#rrggbb` (any colour picker gives you one, for example the one in your browser's developer tools or any "hex colour picker" website). All three can go in the same block:
 
 ```css
 :root {
-  --ag-accent: #3b82f6;   /* buttons, progress bars, checkboxes (default: #cb302d) */
-  --ag-played: #1f9d55;   /* corner mark on watched titles */
-  --ag-radius: 10px;      /* posters and cards */
+  --ag-accent: #a855f7;
+  --ag-played: #f59e0b;
+  --ag-radius: 16px;
 }
 ```
+
+If you also use the [Afterglow plugin](https://github.com/kiketorres98/jellyfin-plugin-afterglow), its side menu highlight follows `--ag-accent` too.
 
 ## Compatibility
 
