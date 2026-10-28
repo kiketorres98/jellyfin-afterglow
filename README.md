@@ -50,7 +50,7 @@ The theme has three settings. You change them in the **same box** where you past
 | Setting | What it changes | Default | Examples |
 |---|---|---|---|
 | `--ag-accent` | The colour of the big play button, buttons, progress bars, checkboxes, the selected tab and the focus ring. Lighter and darker shades are worked out from it automatically. | `#cb302d` (red) | `#3b82f6` blue, `#22c55e` green, `#a855f7` purple, `#f59e0b` amber |
-| `--ag-played` | The small corner mark on titles you have already watched. | `#1f9d55` (green) | `#3b82f6`blue, `#f59e0b` amber |
+| `--ag-played` | The small corner mark on titles you have already watched. | `#1f9d55` (green) | `#3b82f6` blue, `#f59e0b` amber |
 | `--ag-radius` | How round the corners of posters and cards are. `0px` is square. | `10px` | `0px`, `6px`, `16px` |
 
 You only need to write the settings you want to change; leave the others out. Colours are written as `#rrggbb` (any colour picker gives you one, for example the one in your browser's developer tools or any "hex colour picker" website). All three can go in the same block:
@@ -62,6 +62,8 @@ You only need to write the settings you want to change; leave the others out. Co
   --ag-radius: 16px;
 }
 ```
+
+**Don't see the change?** After you save the custom CSS, Jellyfin and your browser can keep showing the old version for about five minutes. Wait a bit and reload the page (Ctrl+F5, or Cmd+Shift+R on a Mac). Other devices pick up the change the same way, a few minutes after their next reload.
 
 If you also use the [Afterglow plugin](https://github.com/kiketorres98/jellyfin-plugin-afterglow), its side menu highlight follows `--ag-accent` too.
 
