@@ -50,7 +50,7 @@ The theme has three settings. You change them in the **same box** where you past
 | Setting | What it changes | Default | Examples |
 |---|---|---|---|
 | `--ag-accent` | The colour of the big play button, buttons, progress bars, checkboxes, the selected tab and the focus ring. Lighter and darker shades are worked out from it automatically. | `#cb302d` (red) | `#3b82f6` blue, `#22c55e` green, `#a855f7` purple, `#f59e0b` amber |
-| `--ag-played` | The small corner mark on titles you have already watched. | `#1f9d55` (green) | `#3b82f6`, `#f59e0b` |
+| `--ag-played` | The small corner mark on titles you have already watched. | `#1f9d55` (green) | `#3b82f6`blue, `#f59e0b` amber |
 | `--ag-radius` | How round the corners of posters and cards are. `0px` is square. | `10px` | `0px`, `6px`, `16px` |
 
 You only need to write the settings you want to change; leave the others out. Colours are written as `#rrggbb` (any colour picker gives you one, for example the one in your browser's developer tools or any "hex colour picker" website). All three can go in the same block:
