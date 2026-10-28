@@ -1,0 +1,235 @@
+/*!
+ * Afterglow for Jellyfin: a calm, cinematic dark theme.
+ * Work in progress (v0.3). Install: Dashboard > General > Custom CSS code.
+ *
+ * Everything is driven by the variables below: change them in your own "Custom CSS code"
+ * after the @import to make the theme yours, e.g.  :root { --ag-accent: #3b82f6; }
+ */
+
+:root {
+  --ag-accent: #cb302d;          /* the colour of buttons, progress bars, checkboxes, focus: change this one */
+  --ag-played: #1f9d55;          /* the corner mark on watched titles */
+  --ag-radius: 10px;             /* posters and cards */
+  --ag-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ag-hairline: rgba(255, 255, 255, 0.09);
+  --ag-lift: 0 14px 32px rgba(0, 0, 0, 0.55);
+
+  /* Jellyfin 12 colours everything from these variables: pointing them at our accent recolours the whole interface. */
+  --jf-palette-primary-main: var(--ag-accent);
+  --jf-palette-primary-light: color-mix(in srgb, var(--ag-accent) 82%, white);
+  --jf-palette-primary-dark: color-mix(in srgb, var(--ag-accent) 70%, black);
+  --jf-card-borderRadius: var(--ag-radius);
+}
+
+/* ---------- Cards: rounded, with a hairline, lifting a little under the pointer ---------- */
+.cardScalable,
+.cardImageContainer {
+  border-radius: var(--ag-radius);
+}
+
+.cardScalable {
+  overflow: hidden;
+  box-shadow: 0 0 0 1px var(--ag-hairline);
+  transition: transform 0.28s var(--ag-ease), box-shadow 0.28s var(--ag-ease);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card-hoverable:hover .cardScalable {
+    transform: translateY(-4px);
+    box-shadow: var(--ag-lift), 0 0 0 1px rgba(255, 255, 255, 0.16);
+  }
+}
+
+.cardText {
+  letter-spacing: 0.005em;
+}
+
+.cardText-first {
+  font-weight: 600;
+}
+
+/* Slim progress bar (its colour comes from the accent above). */
+.itemProgressBar {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* ---------- "Watched": a small green corner instead of a round badge over the picture ---------- */
+/* Jellyfin insets the indicator box by a few pixels: put it flush in the corner. */
+.cardIndicators { top: 0 !important; right: 0 !important; left: auto !important; bottom: auto !important; }
+.cardIndicators .playedIndicator {
+  top: 0;
+  right: 0;
+  width: 36px;
+  height: 36px;
+  margin: 0;
+  border-radius: 0;
+  background: linear-gradient(225deg, var(--ag-played) 0 50%, transparent 50% 100%);
+}
+
+.cardIndicators .playedIndicator .indicatorIcon {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  font-size: 15px;
+  line-height: 1;
+}
+
+/* ---------- Home and libraries: text under the posters on the left, calmer colours, more air between shelves ---------- */
+/* (Jellyfin centres it with "!important", so this has to as well.) */
+.homePage .cardTextCentered,
+.homePage .cardTextCentered > .textActionButton,
+.libraryPage .cardTextCentered,
+.libraryPage .cardTextCentered > .textActionButton {
+  text-align: left !important;
+}
+
+.homePage .cardText-first {
+  color: #f2f2f2;
+}
+
+.homePage .cardText:not(.cardText-first) {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.82em;
+}
+
+.homePage .verticalSection {
+  margin-bottom: 1.4em;
+}
+
+.homePage .sectionTitle-cards {
+  font-size: 1.35rem;
+}
+
+/* The row's scroll arrows: small round glass buttons. */
+.emby-scrollbuttons-button {
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  background: rgba(14, 15, 19, 0.55);
+  transition: background-color 0.2s;
+}
+
+.emby-scrollbuttons-button:hover {
+  background: rgba(14, 15, 19, 0.85);
+}
+
+.emby-scrollbuttons-button:disabled {
+  opacity: 0.35;
+}
+
+/* ---------- Section titles ---------- */
+.sectionTitle,
+.sectionTitle-cards {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Top bar: a little see-through, with the page blurred behind (not the player's own bar) ---------- */
+.skinHeader-withBackground:not(.osdHeader) {
+  background-color: rgba(14, 15, 19, 0.78);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  backdrop-filter: blur(16px) saturate(1.4);
+  border-bottom: 1px solid var(--ag-hairline);
+}
+
+/* ---------- Details page: the facts (year, length, rating) as quiet outlined chips ---------- */
+.itemMiscInfo .mediaInfoItem {
+  margin-right: 0.5em;
+}
+
+.itemMiscInfo .mediaInfoText {
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 4px;
+  background: rgba(14, 15, 19, 0.6);
+  font-weight: 700;
+}
+
+/* ---------- Details page: a taller picture that fades into the page, the title and buttons floating over it ---------- */
+.itemDetailPage .itemBackdrop {
+  position: relative;
+  height: 56vh;
+}
+
+.itemDetailPage .itemBackdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(16, 16, 16, 0.35) 0%, rgba(16, 16, 16, 0) 30%, rgba(16, 16, 16, 0.55) 75%, #101010 100%);
+}
+
+/* The grey band behind the title becomes a soft shadow. */
+.layout-desktop .detailRibbon {
+  background: linear-gradient(to bottom, rgba(16, 16, 16, 0), rgba(16, 16, 16, 0.88) 70%);
+}
+
+.itemDetailPage .detailLogo {
+  width: min(480px, 36vw);
+  height: 130px;
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.75));
+}
+
+.itemDetailPage .itemName {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* Round glass buttons, the play one big and in the accent colour. (Jellyfin forces "margin: 0 !important" on them, so the space comes from "gap".) */
+.itemDetailPage .mainDetailButtons {
+  gap: 14px;
+}
+
+.itemDetailPage .mainDetailButtons .detailButton {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.itemDetailPage .mainDetailButtons .detailButton:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: scale(1.06);
+}
+
+.itemDetailPage .mainDetailButtons .btnPlay {
+  width: 56px;
+  height: 56px;
+  background: var(--ag-accent);
+}
+
+.itemDetailPage .mainDetailButtons .btnPlay:hover {
+  background: color-mix(in srgb, var(--ag-accent) 85%, white);
+}
+
+.itemDetailPage .detailImageContainer .cardScalable {
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+/* ---------- Scrollbars: thin and dark ---------- */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+}
+
+/* ---------- Respect "reduce motion" ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .cardScalable {
+    transition: none;
+  }
+
+  .card-hoverable:hover .cardScalable {
+    transform: none;
+  }
+}
+
+/* "Played" mark: flush in the corner, tick centred in the visible triangle, no square shadow behind it. */
+.cardIndicators .playedIndicator { box-shadow: none !important; }
+.cardIndicators .playedIndicator .indicatorIcon { left: auto !important; top: 2px !important; right: 2px !important; width: 18px !important; height: 18px !important; display: flex !important; align-items: center; justify-content: center; font-size: 16px !important; }
+
+/* List view: the same green corner on the small thumbnail. */
+.listItemIndicators { top: 0 !important; right: 0 !important; left: auto !important; bottom: auto !important; }
+.listItemIndicators .playedIndicator { position: relative !important; top: 0 !important; right: 0 !important; width: 24px !important; height: 24px !important; margin: 0 !important; padding: 0 !important; border-radius: 0 !important; box-shadow: none !important; background: linear-gradient(225deg, #1f9d55 0, #1f9d55 50%, transparent 50%) !important; }
+.listItemIndicators .playedIndicator .indicatorIcon { position: absolute !important; left: auto !important; top: 1px !important; right: 1px !important; width: 13px !important; height: 13px !important; color: rgba(0, 0, 0, .87); }
